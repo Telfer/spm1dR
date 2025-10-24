@@ -1,0 +1,11 @@
+Package: spm1dR
+Title: One-Dimensional Statistical Parametric Mapping
+Version: 0.1.0
+Authors@R: 
+    person("Scott", "Telfer", , "scott.telfer@gmail.com", role = c("aut", "cre"))
+Description: Implements Statistical Parametric Mapping for 1D continuum
+    data using Random Field Theory. Port of Python spm1d package.
+License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
