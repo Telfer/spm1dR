@@ -26,6 +26,7 @@ euler_characteristic <- function(u, df, stat = "T") {
 }
 
 #' Euler characteristic for T field
+#' @noRd
 euler_characteristic_T <- function(t, df) {
   # For 1D T field, EC density (per resel)
   # From Worsley et al. (1996) equation for T fields
@@ -43,6 +44,7 @@ euler_characteristic_T <- function(t, df) {
 }
 
 #' Euler characteristic for F field
+#' @noRd
 euler_characteristic_F <- function(f, df) {
   # df is a vector: c(df_num, df_den)
   # Match Python spm1d implementation exactly
@@ -76,11 +78,13 @@ euler_characteristic_F <- function(f, df) {
 }
 
 #' Euler characteristic for Chi-squared field
+#' @noRd
 euler_characteristic_X2 <- function(x2, df) {
   (2 * pi)^(-0.5) * (x2 / 2)^((df - 1) / 2) * exp(-x2 / 2)
 }
 
 #' Euler characteristic for T² (Hotelling's) field
+#' @noRd
 euler_characteristic_T2 <- function(t2, df) {
   # df is a vector: c(p, n)
   # p = number of variables, n = sample size
@@ -98,6 +102,8 @@ euler_characteristic_T2 <- function(t2, df) {
 #' T distribution: survival function (0D)
 #' @param t test statistic
 #' @param df degrees of freedom
+#' @importFrom stats pt
+#' @noRd
 t_sf0d <- function(t, df) {
   pt(t, df, lower.tail = FALSE)
 }
@@ -105,6 +111,8 @@ t_sf0d <- function(t, df) {
 #' T distribution: inverse survival function (0D)
 #' @param alpha significance level
 #' @param df degrees of freedom
+#' @importFrom stats qt
+#' @noRd
 t_isf0d <- function(alpha, df) {
   qt(alpha, df, lower.tail = FALSE)
 }
@@ -114,6 +122,7 @@ t_isf0d <- function(alpha, df) {
 #' @param df degrees of freedom
 #' @param fwhm field smoothness
 #' @param resels resel counts
+#' @noRd
 t_sf <- function(t, df, fwhm, resels) {
   # 1D Random Field Theory survival function for T field
   # P(max(T) > t) using Euler characteristic heuristic
@@ -145,6 +154,8 @@ t_sf <- function(t, df, fwhm, resels) {
 #' @param fwhm field smoothness
 #' @param resels resel counts
 #' @param withBonf Logical
+#' @importFrom stats pt qt
+#' @noRd
 t_isf <- function(alpha, df, fwhm, resels, withBonf = TRUE) {
   # Find threshold t such that P(max(T) > t) = alpha
   # Python spm1d uses Bonferroni correction by default
@@ -194,16 +205,21 @@ t_isf <- function(alpha, df, fwhm, resels, withBonf = TRUE) {
 # ==============================================================================
 
 #' F distribution: survival function (0D)
+#' @importFrom stats pf
+#' @noRd
 f_sf0d <- function(f, df) {
   pf(f, df[1], df[2], lower.tail = FALSE)
 }
 
 #' F distribution: inverse survival function (0D)
+#' @importFrom stats qf
+#' @noRd
 f_isf0d <- function(alpha, df) {
   qf(alpha, df[1], df[2], lower.tail = FALSE)
 }
 
 #' F distribution: survival function (1D)
+#' @noRd
 f_sf <- function(f, df, fwhm, resels) {
   f_max <- max(f, na.rm = TRUE)
   resel_count <- resels[1]
@@ -218,6 +234,7 @@ f_sf <- function(f, df, fwhm, resels) {
 #' @param fwhm field smoothness
 #' @param resels resel counts
 #' @param withBonf use Bonferroni correction if less severe (default TRUE)
+#' @importFrom stats pf qf optimize
 f_isf <- function(alpha, df, fwhm, resels, withBonf = TRUE) {
   # Find threshold f such that P(max(F) > f) = alpha
 
@@ -267,16 +284,21 @@ f_isf <- function(alpha, df, fwhm, resels, withBonf = TRUE) {
 # ==============================================================================
 
 #' Chi-squared distribution: survival function (0D)
+#' @importFrom stats pchisq
+#' @noRd
 chi2_sf0d <- function(x2, df) {
   pchisq(x2, df, lower.tail = FALSE)
 }
 
 #' Chi-squared distribution: inverse survival function (0D)
+#' @importFrom stats qchisq
+#' @noRd
 chi2_isf0d <- function(alpha, df) {
   qchisq(alpha, df, lower.tail = FALSE)
 }
 
 #' Chi-squared distribution: survival function (1D)
+#' @noRd
 chi2_sf <- function(x2, df, fwhm, resels) {
   x2_max <- max(x2, na.rm = TRUE)
   resel_count <- resels[1]
@@ -286,6 +308,8 @@ chi2_sf <- function(x2, df, fwhm, resels) {
 }
 
 #' Chi-squared distribution: inverse survival function (1D)
+#' @importFrom stats optim
+#' @noRd
 chi2_isf <- function(alpha, df, fwhm, resels) {
   resel_count <- resels[1]
 
@@ -307,6 +331,8 @@ chi2_isf <- function(alpha, df, fwhm, resels) {
 
 #' T² distribution: survival function (0D)
 #' Hotelling's T² follows an F distribution after transformation
+#' importFrom stats pf
+#' @noRd
 t2_sf0d <- function(t2, df) {
   # df = c(p, n) where p = # variables, n = sample size
   # T² ~ (n-1)p/(n-p) * F(p, n-p)
@@ -317,6 +343,8 @@ t2_sf0d <- function(t2, df) {
 }
 
 #' T² distribution: inverse survival function (0D)
+#' @importFrom stats qf
+#' @noRd
 t2_isf0d <- function(alpha, df) {
   p <- df[1]
   n <- df[2]
@@ -326,6 +354,7 @@ t2_isf0d <- function(alpha, df) {
 }
 
 #' T² distribution: survival function (1D)
+#' @noRd
 t2_sf <- function(t2, df, fwhm, resels) {
   t2_max <- max(t2, na.rm = TRUE)
   resel_count <- resels[1]
@@ -335,6 +364,7 @@ t2_sf <- function(t2, df, fwhm, resels) {
 }
 
 #' T² distribution: inverse survival function (1D)
+#' @noRd
 t2_isf <- function(alpha, df, fwhm, resels) {
   resel_count <- resels[1]
 

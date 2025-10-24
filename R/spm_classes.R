@@ -76,11 +76,13 @@ SPM0D <- function(STAT, z, df, beta = NULL, residuals = NULL, sigma2 = NULL) {
 }
 
 #' SPM{t} 0D Class
+#' @noRd
 SPM0D_T <- function(z, df, beta = NULL, residuals = NULL, sigma2 = NULL) {
   SPM0D("T", z, df, beta, residuals, sigma2)
 }
 
 #' SPM{F} 0D Class
+#' @noRd
 SPM0D_F <- function(z, df, X = NULL, beta = NULL, residuals = NULL, sigma2 = NULL) {
   obj <- SPM0D("F", z, df, beta, residuals, sigma2)
   obj$X <- X
@@ -88,11 +90,13 @@ SPM0D_F <- function(z, df, X = NULL, beta = NULL, residuals = NULL, sigma2 = NUL
 }
 
 #' SPM{T2} 0D Class (Hotelling's T-squared)
+#' @noRd
 SPM0D_T2 <- function(z, df, residuals = NULL) {
   SPM0D("T2", z, df, residuals = residuals)
 }
 
 #' SPM{X2} 0D Class (Chi-squared)
+#' @noRd
 SPM0D_X2 <- function(z, df, residuals = NULL) {
   SPM0D("X2", z, df, residuals = residuals)
 }
@@ -143,12 +147,14 @@ SPM <- function(STAT, z, df, fwhm, resels, X = NULL, beta = NULL,
 }
 
 #' SPM{t} 1D Class
+#' @noRd
 SPM_T <- function(z, df, fwhm, resels, X = NULL, beta = NULL,
                   residuals = NULL, sigma2 = NULL, roi = NULL) {
   SPM("T", z, df, fwhm, resels, X, beta, residuals, sigma2, roi)
 }
 
 #' SPM{F} 1D Class
+#' @noRd
 SPM_F <- function(z, df, fwhm, resels, X = NULL, beta = NULL,
                   residuals = NULL, X0 = NULL, sigma2 = NULL, roi = NULL) {
   obj <- SPM("F", z, df, fwhm, resels, X, beta, residuals, sigma2, roi)
@@ -157,12 +163,14 @@ SPM_F <- function(z, df, fwhm, resels, X = NULL, beta = NULL,
 }
 
 #' SPM{T2} 1D Class (Hotelling's T-squared)
+#' @noRd
 SPM_T2 <- function(z, df, fwhm, resels, X = NULL, beta = NULL,
                    residuals = NULL, sigma2 = NULL, roi = NULL) {
   SPM("T2", z, df, fwhm, resels, X, beta, residuals, sigma2, roi)
 }
 
 #' SPM{X2} 1D Class (Chi-squared)
+#' @noRd
 SPM_X2 <- function(z, df, fwhm, resels, X = NULL, beta = NULL,
                    residuals = NULL, sigma2 = NULL, roi = NULL) {
   SPM("X2", z, df, fwhm, resels, X, beta, residuals, sigma2, roi)
