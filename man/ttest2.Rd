@@ -22,8 +22,9 @@ SPM_T or SPM0D_T object
 Two-sample t-test
 }
 \examples{
-YA <- matrix(rnorm(50), 5, 10)
-YB <- matrix(rnorm(50, mean = 1), 5, 10)
+YA <- matrix(rnorm(50), 5, 100)
+YB <- matrix(rnorm(50, mean = 1), 5, 100)
 spm <- ttest2(YA, YB)
 spmi <- inference(spm, alpha = 0.05)
+plot_spm(spmi)
 }

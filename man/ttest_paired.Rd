@@ -20,8 +20,9 @@ SPM_T or SPM0D_T object
 Paired t-test
 }
 \examples{
-YA <- matrix(rnorm(50), 5, 10)
-YB <- YA + matrix(rnorm(50, mean = 0.5), 5, 10)
+YA <- matrix(rnorm(50), 5, 100)
+YB <- YA + matrix(rnorm(50, mean = 0.5), 5, 100)
 spm <- ttest_paired(YA, YB)
 spmi <- inference(spm, alpha = 0.05, two_tailed = TRUE)
+plot_spm(spmi)
 }

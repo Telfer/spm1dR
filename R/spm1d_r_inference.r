@@ -387,6 +387,43 @@ plot.SPM <- function(x,
   invisible(x)
 }
 
+#' Plot spm (ggplot)
+#'
+#' @param x SPM object
+#' @return ggplot object
+#' @importFrom ggplot2 ggplot aes geom_line geom_area geom_ribbon geom_hline theme_classic xlab ylab
+#' @export
+plot_spm <- function(x) {
+  # variables
+  frame <- zstar <- z <- NULL
+
+  # convert to df
+  gg_df <- data.frame(frame = 1:length(x$z),
+                      z = x$z,
+                      zstar = rep(x$zstar, length(x$z)))
+
+  # pull thresholds
+  thres_upper <- x$zstar
+  thres_lower <- x$zstar * -1
+
+  # plot
+  g <- ggplot(gg_df, aes(x = frame, y = z))
+  g <- g + geom_area(fill = "transparent")
+  g <- g + geom_ribbon(aes(ymin = zstar,
+                           ymax = ifelse(z > zstar, z, zstar)),
+                       fill = "darkgrey", alpha = 0.5)
+  g <- g + geom_ribbon(aes(ymin = zstar * -1,
+                           ymax = ifelse(z < zstar * -1, z, zstar * -1)),
+                       fill = "darkgrey", alpha = 0.5)
+  g <- g + geom_line(size = 1)
+  g <- g + geom_hline(yintercept = 0, linetype = "dotted")
+  g <- g + geom_hline(aes(yintercept = thres_upper), linetype = "longdash")
+  g <- g + geom_hline(aes(yintercept = thres_lower), linetype = "longdash")
+  g <- g + theme_classic() + ylab("SPM {t}") + xlab("Frames")
+  print(g)
+}
+
+
 # ==============================================================================
 # SUMMARY METHODS FOR INFERENCE OBJECTS
 # ==============================================================================

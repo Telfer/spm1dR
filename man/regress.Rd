@@ -24,4 +24,5 @@ x <- 1:10
 Y <- outer(x, rep(1, 5)) + matrix(rnorm(50), 10, 5)
 spm <- regress(Y, x)
 spmi <- inference(spm, alpha = 0.05)
+plot_spm(spmi)
 }

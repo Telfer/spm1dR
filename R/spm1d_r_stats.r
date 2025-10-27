@@ -149,10 +149,11 @@ ttest <- function(Y, mu = 0, roi = NULL) {
 #' @export
 #'
 #' @examples
-#' YA <- matrix(rnorm(50), 5, 10)
-#' YB <- matrix(rnorm(50, mean = 1), 5, 10)
+#' YA <- matrix(rnorm(50), 5, 100)
+#' YB <- matrix(rnorm(50, mean = 1), 5, 100)
 #' spm <- ttest2(YA, YB)
 #' spmi <- inference(spm, alpha = 0.05)
+#' plot_spm(spmi)
 ttest2 <- function(YA, YB, equal_var = TRUE, roi = NULL) {
 
   YA <- as.matrix(YA)
@@ -189,10 +190,11 @@ ttest2 <- function(YA, YB, equal_var = TRUE, roi = NULL) {
 #' @export
 #'
 #' @examples
-#' YA <- matrix(rnorm(50), 5, 10)
-#' YB <- YA + matrix(rnorm(50, mean = 0.5), 5, 10)
+#' YA <- matrix(rnorm(50), 5, 100)
+#' YB <- YA + matrix(rnorm(50, mean = 0.5), 5, 100)
 #' spm <- ttest_paired(YA, YB)
 #' spmi <- inference(spm, alpha = 0.05, two_tailed = TRUE)
+#' plot_spm(spmi)
 ttest_paired <- function(YA, YB, roi = NULL) {
 
   YA <- as.matrix(YA)
@@ -228,6 +230,7 @@ ttest_paired <- function(YA, YB, roi = NULL) {
 #' Y <- outer(x, rep(1, 5)) + matrix(rnorm(50), 10, 5)
 #' spm <- regress(Y, x)
 #' spmi <- inference(spm, alpha = 0.05)
+#' plot_spm(spmi)
 regress <- function(Y, x, roi = NULL) {
 
   Y <- as.matrix(Y)
@@ -267,6 +270,7 @@ regress <- function(Y, x, roi = NULL) {
 #' Y3 <- matrix(rnorm(30, mean = 1), 3, 10)
 #' spm <- anova1(list(Y1, Y2, Y3))
 #' spmi <- inference(spm, alpha = 0.05, withBonf = TRUE)
+#' plot_spm(spmi)
 anova1 <- function(Y, roi = NULL) {
 
   if (!is.list(Y)) {

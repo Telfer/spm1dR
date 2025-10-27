@@ -23,4 +23,5 @@ Y2 <- matrix(rnorm(30, mean = 0.5), 3, 10)
 Y3 <- matrix(rnorm(30, mean = 1), 3, 10)
 spm <- anova1(list(Y1, Y2, Y3))
 spmi <- inference(spm, alpha = 0.05, withBonf = TRUE)
+plot_spm(spmi)
 }
