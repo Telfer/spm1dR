@@ -11,6 +11,5 @@ spm1d uses Random Field Theory expectations regarding the behavior of smooth, on
 You can install the development version of spm1dR from [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("pak")
-pak::pak("Telfer/spm1dR")
+devtools::install_github("Telfer/spm1dR")
 ```
